@@ -7,6 +7,7 @@ import {
   Button,
   Loader,
   Text,
+  toast,
   useChat,
   useCreateChatMessage,
   useLivestream,
@@ -234,6 +235,17 @@ export function ChatBox({
 
   const submit = () => {
     if (!message.trim()) return;
+    if ([...message].length > 300) {
+      toast.show(
+        "Message too long",
+        "Please limit your message to 300 characters.",
+        {
+          variant: "error",
+          duration: 3,
+        },
+      );
+      return;
+    }
     setMessage("");
     setReplyToMessage(null);
 
